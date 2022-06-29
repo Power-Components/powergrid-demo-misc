@@ -197,13 +197,11 @@ final class FiltersTable extends PowerGridComponent
     public function actions(): array
     {
         return [
-            Button::add('edit-stock')
-                ->caption('<div id="edit">Edit</div>')
+            Button::make('edit-stock', 'Edit')
                 ->class('text-center')
                 ->openModal('edit-stock', ['dishId' => 'id']),
 
-            Button::add('destroy')
-                ->caption(__('Delete'))
+            Button::make('destroy', 'Delete')
                 ->class('text-center')
                 ->emit('deletedEvent', ['dishId' => 'id'])
                 ->method('delete'),

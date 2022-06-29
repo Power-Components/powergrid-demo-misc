@@ -19,7 +19,7 @@ return [
     | Plugins
     |--------------------------------------------------------------------------
     |
-    | Plugins used: bootstrap-select when bootstrap, flatpicker.js to datepicker.
+    | Plugins used: bootstrap-select when bootstrap, flatpickr.js to datepicker.
     |
     */
 

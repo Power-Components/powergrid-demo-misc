@@ -11,15 +11,15 @@
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.10",
-        "power-components/livewire-powergrid": "^3.0",
+        "power-components/livewire-powergrid": "dev-main",
         "predis/predis": "^1.1",
-        "torchlight/torchlight-laravel": "^0.5.11",
         "wire-elements/modal": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
         "fakerphp/faker": "^1.9.1",
         "friendsofphp/php-cs-fixer": "^3.8",
+        "laradumps/laradumps": "^0.1",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",

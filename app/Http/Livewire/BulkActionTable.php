@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use App\Enums\Diet;
 use App\Models\{Category, Dish, Kitchen};
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\{Carbon, Str};
+use Illuminate\Support\{Carbon, Facades\DB, Str};
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
 use PowerComponents\LivewirePowerGrid\{Button,
     Column,
@@ -101,7 +101,14 @@ final class BulkActionTable extends PowerGridComponent
      */
     public function datasource()
     {
-        return Dish::with(['category:id,name', 'kitchen']);
+        return Dish::query()
+            ->join('categories', function ($categories) {
+                $categories->on('dishes.category_id', '=', 'categories.id');
+            })
+            ->join('kitchens', function ($categories) {
+                $categories->on('dishes.kitchen_id', '=', 'kitchens.id');
+            })
+            ->select('dishes.*', 'categories.name as category_name', DB::raw('DATE_FORMAT(dishes.produced_at, "%d/%m/%Y") as produced_at_formatted'));
     }
 
     /*
@@ -173,7 +180,7 @@ final class BulkActionTable extends PowerGridComponent
                 return Diet::from($dish->diet)->labels();
             })
             ->addColumn('produced_at')
-            ->addColumn('produced_at_formatted', fn (Dish $dish) => Carbon::parse($dish->produced_at)->format('d/m/Y'));
+            ->addColumn('produced_at_formatted');
     }
 
     /*
@@ -270,7 +277,9 @@ final class BulkActionTable extends PowerGridComponent
             Column::add()
                 ->title(__('Production date'))
                 ->field('produced_at_formatted')
-                ->makeInputDatePicker('produced_at'),
+                ->makeInputDatePicker('produced_at')
+                ->sortable(),
+            //  ->searchableRaw('DATE_FORMAT(dishes.produced_at, "%d/%m/%Y")'),
         ];
     }
 

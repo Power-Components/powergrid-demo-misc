@@ -87,6 +87,11 @@ class Menu extends Component
                 'route' => route('bulk-actions'),
                 'name'  => 'bulk-actions',
             ],
+            [
+                'label' => 'Soft Delete',
+                'route' => route('soft-delete'),
+                'name'  => 'soft-delete',
+            ],
         ]);
     }
 

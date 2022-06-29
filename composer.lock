@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "72f5a2a99028f59e9468c3d587878209",
+    "content-hash": "d2695f2a99d36ce88554ef50dceef080",
     "packages": [
         {
             "name": "brick/math",
@@ -2581,17 +2581,11 @@
         },
         {
             "name": "power-components/livewire-powergrid",
-            "version": "v3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Power-Components/livewire-powergrid.git",
-                "reference": "3d6dcf41fd9982a3cd0a385e69269f823980ff5d"
-            },
+            "version": "dev-main",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Power-Components/livewire-powergrid/zipball/3d6dcf41fd9982a3cd0a385e69269f823980ff5d",
-                "reference": "3d6dcf41fd9982a3cd0a385e69269f823980ff5d",
-                "shasum": ""
+                "type": "path",
+                "url": "packages/livewire-powergrid",
+                "reference": "7c49bafe677e20606b0456b5b9655026993c5b76"
             },
             "require": {
                 "doctrine/dbal": "^3.1|^2.12.1",
@@ -2603,6 +2597,7 @@
                 "composer/composer": "^2.1",
                 "friendsofphp/php-cs-fixer": "^3.2",
                 "illuminate/support": "^8.18|^9.0",
+                "laradumps/laradumps": "^0.1.2",
                 "nunomaduro/larastan": "^1.0 | ^2.1",
                 "orchestra/testbench": "^6.17 | ^7.0",
                 "pestphp/pest": "^1.21",
@@ -2619,14 +2614,55 @@
                 }
             },
             "autoload": {
-                "files": [
-                    "src/functions.php"
-                ],
                 "psr-4": {
                     "PowerComponents\\LivewirePowerGrid\\": "src"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "PowerComponents\\LivewirePowerGrid\\Tests\\": "tests"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "scripts": {
+                "cs-fixer": [
+                    "./vendor/bin/php-cs-fixer fix --verbose --dry-run --using-cache=no --stop-on-violation"
+                ],
+                "fix": [
+                    "./vendor/bin/php-cs-fixer fix"
+                ],
+                "test": [
+                    "@test:sqlite"
+                ],
+                "test:sqlite": [
+                    "./vendor/bin/pest --configuration phpunit.sqlite.xml"
+                ],
+                "test:mysql": [
+                    "./vendor/bin/pest --configuration phpunit.mysql.xml"
+                ],
+                "test:pgsql": [
+                    "./vendor/bin/pest --configuration phpunit.pgsql.xml"
+                ],
+                "test:sqlsrv": [
+                    "./vendor/bin/pest --configuration phpunit.sqlsrv.xml"
+                ],
+                "test:types": [
+                    "./vendor/bin/phpstan analyse --ansi --memory-limit=-1"
+                ],
+                "test:dbs": [
+                    "@test:sqlite",
+                    "@test:mysql",
+                    "@test:pgsql",
+                    "@test:sqlsrv"
+                ],
+                "check": [
+                    "@cs-fixer",
+                    "@test:types",
+                    "@test"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -2639,11 +2675,9 @@
             ],
             "description": "PowerGrid generates Advanced Datatables using Laravel Livewire.",
             "homepage": "https://github.com/power-components/livewire-powergrid",
-            "support": {
-                "issues": "https://github.com/Power-Components/livewire-powergrid/issues",
-                "source": "https://github.com/Power-Components/livewire-powergrid/tree/v3.0.0"
-            },
-            "time": "2022-05-22T17:04:20+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "predis/predis",
@@ -5619,71 +5653,6 @@
             "time": "2021-12-08T09:12:39+00:00"
         },
         {
-            "name": "torchlight/torchlight-laravel",
-            "version": "v0.5.11",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/torchlight-api/torchlight-laravel.git",
-                "reference": "e69530e720d09f6791eff2a13e4d408ba0eaf6dc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/torchlight-api/torchlight-laravel/zipball/e69530e720d09f6791eff2a13e4d408ba0eaf6dc",
-                "reference": "e69530e720d09f6791eff2a13e4d408ba0eaf6dc",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^7.2",
-                "illuminate/cache": "^7.26.0|^8.0|^9.0",
-                "illuminate/console": "^7.26.0|^8.0|^9.0",
-                "illuminate/http": "^7.26.0|^8.0|^9.0",
-                "illuminate/support": "^7.26.0|^8.0|^9.0",
-                "illuminate/view": "^7.26.0|^8.0|^9.0",
-                "php": "^7.3|^8.0",
-                "ramsey/uuid": "^3.7|^4.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.3.3",
-                "orchestra/testbench": "^5.0|^6.0|^7.0",
-                "phpunit/phpunit": "^8.5.23|^9.5"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Torchlight\\TorchlightServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Torchlight\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Aaron Francis",
-                    "email": "aaron@hammerstone.dev"
-                }
-            ],
-            "description": "A Laravel Client for Torchlight, the syntax highlighting API.",
-            "homepage": "https://torchlight.dev",
-            "keywords": [
-                "Code highlighting",
-                "laravel",
-                "syntax highlighting"
-            ],
-            "support": {
-                "issues": "https://github.com/torchlight-api/torchlight-laravel/issues",
-                "source": "https://github.com/torchlight-api/torchlight-laravel/tree/v0.5.11"
-            },
-            "time": "2022-02-13T15:30:32+00:00"
-        },
-        {
             "name": "vlucas/phpdotenv",
             "version": "v5.4.1",
             "source": {
@@ -6730,6 +6699,66 @@
                 "source": "https://github.com/hamcrest/hamcrest-php/tree/v2.0.1"
             },
             "time": "2020-07-09T08:09:16+00:00"
+        },
+        {
+            "name": "laradumps/laradumps",
+            "version": "v0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laradumps/laradumps.git",
+                "reference": "304df290675baf5f79fa40601243476ca1c46085"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laradumps/laradumps/zipball/304df290675baf5f79fa40601243476ca1c46085",
+                "reference": "304df290675baf5f79fa40601243476ca1c46085",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.8",
+                "illuminate/support": "^8.18 | ^9.0",
+                "nunomaduro/larastan": "^1.0 | ^2.1",
+                "orchestra/testbench": "^6.17 | ^7.0",
+                "pestphp/pest": "^1.21",
+                "symfony/var-dumper": "^5.4 | ^6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LaraDumps\\LaraDumps\\LaraDumpsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "LaraDumps\\LaraDumps\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Luan Freitas",
+                    "email": "luanfreitas10@protonmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Dump Component for Laravel.",
+            "homepage": "https://github.com/laradumps/laradumps",
+            "support": {
+                "issues": "https://github.com/laradumps/laradumps/issues",
+                "source": "https://github.com/laradumps/laradumps/tree/v0.1.2"
+            },
+            "time": "2022-06-21T16:44:14+00:00"
         },
         {
             "name": "laravel/sail",
@@ -9459,7 +9488,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "power-components/livewire-powergrid": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

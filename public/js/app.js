@@ -3007,11 +3007,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
           falseValue: e.falseValue,
           toggle: e.toggle,
           save: function save() {
-            var e = this.toggle;
             this.toggle = 0 === this.toggle ? 1 : 0, this.$wire.emit("pg:toggleable-" + this.tableName, {
               id: this.id,
               field: this.field,
-              value: e
+              value: this.toggle
             });
           }
         };

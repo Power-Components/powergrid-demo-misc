@@ -32,7 +32,7 @@ final class SimpleTable extends PowerGridComponent
 
             Footer::make()
                 ->showPerPage()
-                ->showRecordCount(),
+                ->showRecordCount('min'),
         ];
     }
 

@@ -336,20 +336,14 @@ final class DishesTable extends PowerGridComponent
     /**
      * PowerGrid Dish Action Buttons.
      *
-     * @return array<int, \PowerComponents\LivewirePowerGrid\Button>
+     * @return array<int, Button>
      */
     public function actions(): array
     {
-        $theme = config('livewire-powergrid.theme');
-
-        $edit   = ($theme == 'tailwind') ? 'bg-indigo-500 cursor-pointer text-white px-3 py-2 m-1 rounded text-sm' : 'btn btn-primary';
-
-        $delete = ($theme == 'tailwind') ? 'bg-red-500 text-white px-3 py-2 m-1 rounded text-sm' : 'btn btn-danger';
-
         return [
             Button::add('edit')
                 ->caption('Edit')
-                ->class($edit)
+                ->class('bg-indigo-500 cursor-pointer text-white px-3 py-2 m-1 rounded text-sm')
                 ->emit('edit-dish', [
                     'dishId' => 'id',
                     'custom' => __METHOD__,
@@ -357,7 +351,7 @@ final class DishesTable extends PowerGridComponent
 
             Button::add('destroy')
                 ->caption(__('Delete'))
-                ->class($delete)
+                ->class('bg-red-500 text-white px-3 py-2 m-1 rounded text-sm')
                 ->openModal('delete-dish', [
                     'dishId'                  => 'id',
                     'confirmationTitle'       => 'Delete dish',
@@ -374,6 +368,11 @@ final class DishesTable extends PowerGridComponent
     |
     */
 
+    public function test(array $params)
+    {
+        ds($params)->label('test');
+    }
+
     /**
      * PowerGrid Dish Action Rules.
      *
@@ -383,8 +382,9 @@ final class DishesTable extends PowerGridComponent
     {
         return [
             Rule::button('edit')
-                ->when(fn ($dish) => $dish->id == 1)
-                ->hide(),
+                ->when(fn ($dish) => $dish->id == 2)
+                ->setAttribute('class', 'bg-green-200')
+                ->setAttribute('wire:click', ['test' , ['param1' => 1, 'dishId' => 'id']]),
 
             Rule::button('destroy')
                 ->when(fn ($dish) => $dish->id == 1)

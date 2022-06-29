@@ -21,6 +21,7 @@ class CreateDishesTable extends Migration
             $table->boolean('in_stock')->default(false);
             $table->date('produced_at');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

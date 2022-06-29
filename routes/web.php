@@ -18,5 +18,6 @@ Route::get('/export', fn () => view('export'))->name('export');
 Route::get('/batch', fn () => view('batch'))->name('batch');
 Route::get('/custom-layout', fn () => view('custom-layout'))->name('custom-layout');
 Route::get('/bulk-actions', fn () => view('bulk-actions'))->name('bulk-actions');
+Route::get('/soft-delete', fn () => view('soft-delete'))->name('soft-delete');
 
 Route::view('/powergrid', 'powergrid-demo');
